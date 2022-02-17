@@ -40,15 +40,16 @@ class ArtikelRepositoryTest extends AbstractTransactionalJUnit4SpringContextTest
                 );
     }
 
-/*    @Test
+    @Test
     void findByArtikelGroepNaam() {
-        var artikelGroep = "testArtikelgroep";
+/*        var artikelGroep = "testArtikelGroep";
         assertThat(repository.findByArtikelGroepNaam(artikelGroep))
                 .hasSize(countRowsInTableWhere(ARTIKELS,
-                        "artikelgroepId = (select id from artikelgroepen where naam = 'testArtikelgroep'"))
+                        "artikelGroepId = (select id from artikelgroepen where naam = 'testArtikelGroep'"))
                 .first()
                 .extracting(Artikel::getArtikelGroep)
                 .extracting(ArtikelGroep::getNaam)
-                .isEqualTo(artikelGroep);
-    }*/
+                .isEqualTo(artikelGroep)*/
+        ;
+    }
 }
