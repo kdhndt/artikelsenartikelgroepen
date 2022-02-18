@@ -27,29 +27,25 @@ class ArtikelRepositoryTest extends AbstractTransactionalJUnit4SpringContextTest
         var max = BigDecimal.TEN;
         assertThat(repository.findByPrijsBetween(min, max))
                 .hasSize(countRowsInTableWhere(ARTIKELS, "prijs between 1 and 10"))
-                .allSatisfy(artikel -> assertThat(artikel.getPrijs()).isBetween(min, max));
+                .extracting(Artikel::getPrijs)
+                .allSatisfy(prijs -> assertThat(prijs).isBetween(min, max));
     }
-
     @Test
-    void findMetHoogsteArtikelprijs() {
-        assertThat(repository.findMetHoogsteArtikelPrijs())
-                .hasSize(countRowsInTableWhere(ARTIKELS, "prijs = (select max(prijs) from artikels)"))
-                .first().extracting(Artikel::getNaam).isEqualTo(
-                        jdbcTemplate.queryForObject("select naam from artikels where prijs = (select max(prijs) from artikels)",
-                                String.class)
-                );
+    void findHoogstePrijs() {
+        assertThat(repository.findHoogstePrijs())
+                .isEqualByComparingTo(jdbcTemplate.queryForObject("select max(prijs) from artikels", BigDecimal.class));
     }
 
     @Test
     void findByArtikelGroepNaam() {
-/*        var artikelGroep = "testArtikelGroep";
+        var artikelGroep = "testArtikelGroep1";
         assertThat(repository.findByArtikelGroepNaam(artikelGroep))
                 .hasSize(countRowsInTableWhere(ARTIKELS,
-                        "artikelGroepId = (select id from artikelgroepen where naam = 'testArtikelGroep'"))
+                        "artikelGroepId = (select id from artikelgroepen where naam = 'testArtikelGroep1')"))
                 .first()
                 .extracting(Artikel::getArtikelGroep)
                 .extracting(ArtikelGroep::getNaam)
-                .isEqualTo(artikelGroep)*/
+                .isEqualTo(artikelGroep)
         ;
     }
 }

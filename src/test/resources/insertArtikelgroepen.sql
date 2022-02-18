@@ -1,2 +1,3 @@
 insert into artikelgroepen(naam) values
-('testArtikelGroep');
+('testArtikelGroep1'),
+('testArtikelGroep2');

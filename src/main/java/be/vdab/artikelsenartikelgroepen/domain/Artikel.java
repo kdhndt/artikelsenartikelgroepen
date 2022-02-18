@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 @Table(name = "artikels")
 public class Artikel {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String naam;
     private BigDecimal prijs;
